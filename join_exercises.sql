@@ -48,21 +48,13 @@ SELECT CONCAT(employees.first_name, ' ', employees.last_name) AS 'Employee',
     FROM employees
     JOIN dept_emp AS de
         ON employees.emp_no = de.emp_no
-    LEFT JOIN departments
+    JOIN departments
         ON de.dept_no = departments.dept_no
-    LEFT JOIN dept_manager AS dm
+    JOIN dept_manager AS dm
         ON departments.dept_no = dm.dept_no
-    LEFT JOIN employees AS managers
+    JOIN employees AS managers
         ON dm.emp_no = managers.emp_no
 WHERE de.to_date = '9999-01-01'
-AND dm.to_date = '9999-01-01';
-
-
-
-# SELECT CONCAT(e.first_name, ' ', e.last_name) AS full_name, d.dept_name
-# FROM employees as e
-#          JOIN dept_emp as de
-#               ON de.emp_no = e.emp_no
-#          JOIN departments as d
-#               ON d.dept_no = de.dept_no
-# WHERE de.to_date = '9999-01-01' AND e.emp_no = 10001;
+AND dm.to_date = '9999-01-01'
+ORDER BY departments.dept_name,
+         employees.emp_no;
